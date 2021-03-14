@@ -1,11 +1,11 @@
 import 'dart:convert';
-
 import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:flutter/services.dart';
 import 'package:flutter_payu_money/flutter_payu_money.dart';
 import 'package:flutter_payu_money/models/payment_params_model.dart';
+import 'package:flutter_payu_money/models/payment_result.dart';
+import 'package:flutter_payu_money/models/payment_status.dart';
 import 'package:flutter_payu_money_example/credentials.dart';
 import 'package:flutter_payu_money_example/widgets/common_text_field.dart';
 
@@ -35,37 +35,58 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> pay() async {
     PaymentParams _paymentParam = PaymentParams(
-        merchantID: _merchantIDTextFieldController.text,
-        merchantKey: _merchantKeyTextFieldController.text,
-        salt: _saltTextFieldController.text,
-        amount: _amountTextFieldController.text,
-        transactionID: _transactionIDTextFieldController.text,
-        firstName: _nameTextFieldController.text,
-        email: _emailTextFieldController.text,
-        productName: _productInfoTextFieldController.text,
-        phone: "9876543210",
-        fURL: "https://www.payumoney.com/mobileapp/payumoney/failure.php",
-        sURL: "https://www.payumoney.com/mobileapp/payumoney/success.php",
-        udf1: "udf1",
-        udf2: "udf2",
-        udf3: "udf3",
-        udf4: "udf4",
-        udf5: "udf5",
-        udf6: "",
-        udf7: "",
-        udf8: "",
-        udf9: "",
-        udf10: "");
+      merchantID: _merchantIDTextFieldController.text,
+      merchantKey: _merchantKeyTextFieldController.text,
+      salt: _saltTextFieldController.text,
+      amount: _amountTextFieldController.text,
+      transactionID: _transactionIDTextFieldController.text,
+      firstName: _nameTextFieldController.text,
+      email: _emailTextFieldController.text,
+      productName: _productInfoTextFieldController.text,
+      phone: "9876543210",
+      fURL: "https://www.payumoney.com/mobileapp/payumoney/failure.php",
+      sURL: "https://www.payumoney.com/mobileapp/payumoney/success.php",
+      udf1: "udf1",
+      udf2: "udf2",
+      udf3: "udf3",
+      udf4: "udf4",
+      udf5: "udf5",
+      udf6: "",
+      udf7: "",
+      udf8: "",
+      udf9: "",
+      udf10: "",
+      hash: "", //Hash is required will initialise with empty string now to set actuall hash later
+      isDebug: true, // true for Test Mode, false for Production
+    );
 
-    // _paymentParam.isDebug = true;
+    //Generating local hash
+    var bytes = utf8.encode(
+        "${_paymentParam.merchantKey}|${_paymentParam.transactionID}|${_paymentParam.amount}|${_paymentParam.productName}|${_paymentParam.firstName}|${_paymentParam.email}|udf1|udf2|udf3|udf4|udf5||||||${_paymentParam.salt}");
+    String localHash = sha512.convert(bytes).toString();
+    _paymentParam.hash = localHash;
 
     try {
-      var bytes = utf8.encode(
-          "${_paymentParam.merchantKey}|${_paymentParam.transactionID}|${_paymentParam.amount}|${_paymentParam.productName}|${_paymentParam.firstName}|${_paymentParam.email}|udf1|udf2|udf3|udf4|udf5||||||${_paymentParam.salt}");
-      String localHash = sha512.convert(bytes).toString();
-      _paymentParam.hash = localHash;
-      Map result = await FlutterPayuMoney.initiatePayment(paymentParams: _paymentParam, showCompletionScreen: true);
-      print("Done exec $result");
+      PayuPaymentResult _paymentResult = await FlutterPayUMoney.initiatePayment(paymentParams: _paymentParam, showCompletionScreen: true);
+
+      //Checks for success and prints result
+
+      if (_paymentResult != null) {
+        //_paymentResult.status is String of course. Directly fetched from payU's Payment response. More statuses can be compared manually
+
+        if (_paymentResult.status == PayuPaymentStatus.success) {
+          print("Success: ${_paymentResult.response}");
+        } else if (_paymentResult.status == PayuPaymentStatus.failed) {
+          print("Failed: ${_paymentResult.response}");
+        } else if (_paymentResult.status == PayuPaymentStatus.cancelled) {
+          print("Cancelled by User: ${_paymentResult.response}");
+        } else {
+          print("Response: ${_paymentResult.response}");
+          print("Status: ${_paymentResult.status}");
+        }
+      } else {
+        print("Something's rotten here");
+      }
     } catch (e) {
       print(e);
     }

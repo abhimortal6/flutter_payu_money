@@ -149,6 +149,7 @@ public class FlutterPayuMoneyPlugin implements FlutterPlugin, MethodCallHandler,
         PayUmoneySdkInitializer.PaymentParam paymentParam = builder.build();
         paymentParam.setMerchantHash(hash);
 
+
         PayUmoneyFlowManager.startPayUMoneyFlow(
                 paymentParam,
                 activity,
@@ -160,7 +161,6 @@ public class FlutterPayuMoneyPlugin implements FlutterPlugin, MethodCallHandler,
 
     @Override
     public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.e("PayU Android Native", "request code " + requestCode + " resultcode " + resultCode);
         if (requestCode == PayUmoneyFlowManager.REQUEST_CODE_PAYMENT && resultCode == RESULT_OK && data != null) {
             TransactionResponse transactionResponse = data.getParcelableExtra(PayUmoneyFlowManager.INTENT_EXTRA_TRANSACTION_RESPONSE);
 
