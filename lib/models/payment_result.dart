@@ -1,5 +1,5 @@
 class PayuPaymentResult {
-  Map<String, dynamic> response;
+  Map<dynamic, dynamic> response;
   String status;
 
   PayuPaymentResult({this.response, this.status});

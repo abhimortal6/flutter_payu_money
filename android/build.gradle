@@ -36,6 +36,5 @@ dependencies {
     implementation 'com.payumoney.core:payumoney-sdk:7.6.0'
     implementation 'com.payumoney.sdkui:plug-n-play:1.6.0'
     implementation 'com.google.code.gson:gson:2.8.6'
-
-
+    implementation 'com.airbnb.android:paris:1.7.2'
 }

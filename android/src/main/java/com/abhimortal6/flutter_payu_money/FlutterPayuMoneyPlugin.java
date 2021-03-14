@@ -1,10 +1,6 @@
 package com.abhimortal6.flutter_payu_money;
 
 import android.app.Activity;
-
-import static android.app.Activity.RESULT_CANCELED;
-import static android.app.Activity.RESULT_OK;
-
 import android.content.Intent;
 
 import androidx.annotation.NonNull;
@@ -18,15 +14,17 @@ import com.payumoney.sdkui.ui.utils.PayUmoneyFlowManager;
 import java.util.HashMap;
 import java.util.Map;
 
-import io.flutter.Log;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
+import io.flutter.embedding.engine.plugins.activity.ActivityAware;
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
-import io.flutter.embedding.engine.plugins.activity.ActivityAware;
 import io.flutter.plugin.common.PluginRegistry;
+
+import static android.app.Activity.RESULT_CANCELED;
+import static android.app.Activity.RESULT_OK;
 
 /**
  * FlutterPayuMoneyPlugin
@@ -153,7 +151,7 @@ public class FlutterPayuMoneyPlugin implements FlutterPlugin, MethodCallHandler,
         PayUmoneyFlowManager.startPayUMoneyFlow(
                 paymentParam,
                 activity,
-                R.style.AppTheme_default,
+                R.style.AppTheme_Green,
                 !showCompletionScreen);
 
 

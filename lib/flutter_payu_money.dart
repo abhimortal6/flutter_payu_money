@@ -21,7 +21,7 @@ class FlutterPayUMoney {
         print("Flutter PayU Money: logs are available in debug mode only");
         print("Arguments Map: $_map");
       }
-      Map<String, dynamic> _resultMap = await _channel.invokeMethod(Constants.initiatePaymentMethod, _map);
+      Map<dynamic, dynamic> _resultMap = await _channel.invokeMethod(Constants.initiatePaymentMethod, _map);
       PayuPaymentResult _paymentResult = PayuPaymentResult(response: _resultMap, status: _resultMap["result"]["status"]);
       return _paymentResult;
     } else {
