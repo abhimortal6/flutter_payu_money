@@ -4,9 +4,9 @@
     <color name="primary_dark">#165E8B</color>
     <color name="accent">#7AA4D5</color>
     <color name="white">#FFFFFF</color>
-    <color name="persian_green_primary">#0DAC8F</color>
-    <color name="persian_green_dark">#0A927A</color>
-    <color name="persian_green_accent">#0A927A</color>
+    <color name="persian_green_primary">#BAD336</color>
+    <color name="persian_green_dark">#B1CB41</color>
+    <color name="persian_green_accent">#B1CB41</color>
     <color name="pink_primary">#EB1E63</color>
     <color name="pink_dark">#C0175C</color>
     <color name="pink_accent">#C0175C</color>

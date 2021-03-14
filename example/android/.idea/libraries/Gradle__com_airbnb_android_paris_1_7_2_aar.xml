@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.airbnb.android:paris:1.7.2@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a00b1cbff67fdb5fca6b1b0b288c549a/paris-1.7.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a00b1cbff67fdb5fca6b1b0b288c549a/paris-1.7.2/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a00b1cbff67fdb5fca6b1b0b288c549a/paris-1.7.2/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.airbnb.android/paris/1.7.2/e359830459aeefc7850756670ece6ca9a22d749/paris-1.7.2-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.airbnb.android/paris/1.7.2/e62b66eebee1cd2a2ae893e84d71b95042ff8b9c/paris-1.7.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
